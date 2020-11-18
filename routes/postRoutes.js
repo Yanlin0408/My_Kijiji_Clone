@@ -41,7 +41,8 @@ module.exports = (app) => {
 
   app.get("/api/post/user/get", async (req, res) => {
     const posts = await Post.find();
-    const userPosts = posts.filter((post) => post.userId === req.user.id);
+    //const userPosts = posts.filter((post) => post.userId === req.user.id);
+    const userPosts = posts.filter((post) => post.userId === req.user.googleId);
     res.send(userPosts);
   });
 
@@ -50,8 +51,8 @@ module.exports = (app) => {
     res.send(posts);
   });
 
-  // app.get("/api/post/:id", async(req, res) => {
-  //   const post = await Post.findById(req.params.id);
-  //   res.send(post),
-  // });
+  app.get("/api/post/:id", async(req, res) => {
+    const post = await Post.findById(req.params.id);
+    res.send(post);
+  });
 };

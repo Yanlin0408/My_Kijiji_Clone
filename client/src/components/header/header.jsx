@@ -18,32 +18,38 @@ class Header extends React.Component {
       case false:
         return (
           <li class="nav-item">
-            <a class="nav-link" href="/auth/google">
+            <a class="nav-link" href="/auth/google" style={{ margin: 10, width: 80 }}>
               Google Login
             </a>
           </li>
         );
       default:
         return (
-          <div>
+          <div className="row">
+            <div className = "col-4">
             <li class="nav-item">
-              <a class="nav-link" href="/user">
-                My Posts
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/auth/logout">
-                Log Out
-              </a>
-            </li>
-            {show === true ?
-            (<div>
-              <button type="button" class="btn btn-outline-secondary bg-light" variant="outlined" onClick = {() => this.setState({show: !show})}>close</button>
-              <PostForm/>
+                <a class="nav-link" href="/user" style={{ margin: 10, width: 100 }}>
+                  My Posts
+                </a>
+              </li>
             </div>
-            )
-            :(<button type="button" class="btn btn-outline-secondary bg-light" variant="outlined" onClick = {() => this.setState({show: !show})}>post Ad</button>)
-            }
+            <div className = "col-4">
+            <li class="nav-item">
+                <a class="nav-link" href="/auth/logout" style={{ margin: 10, width: 100 }}>
+                  Log Out
+                </a>
+              </li>
+            </div>
+            <div className = "col-4">
+            {show === true ?
+              (<div style = {{marginTop: 12 }}>
+                <button type="button" class="btn btn-outline-secondary bg-light" variant="outlined" onClick = {() => this.setState({show: !show})}>close</button>
+                <PostForm/>
+              </div>
+              )
+              :(<button style = {{marginTop: 12 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined" onClick = {() => this.setState({show: !show})}>post Ad</button>)
+              }
+            </div>
           </div>
         );
     }
@@ -66,8 +72,8 @@ class Header extends React.Component {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">{this.renderHeader()}</ul>
+        <div style={{width:2000}}>
+          { <ul className="navbar-nav">{this.renderHeader()}</ul> }
         </div>
       </nav>
     );

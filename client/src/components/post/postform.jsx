@@ -22,8 +22,6 @@ class PostForm extends React.Component {
     const imageURL = config.data.key;
     //上传照片用的URL
     const API = config.data.url;
-    console.log(imageURL);
-    console.log(API);
     // upload image into AWS by API
     await axios.put(API, file, {
       headers: {
@@ -43,12 +41,14 @@ class PostForm extends React.Component {
             <TextField
               id="standard-basic"
               label="Title"
+              color="secondary"
               style={{ margin: 10, width: 300 }}
               onChange={(e) => this.setState({ title: e.target.value })}
             />
             <TextField
               id="standard-basic"
               label="Price"
+              color="secondary"
               style={{ margin: 10, width: 300 }}
               onChange={(e) => this.setState({ price: Number(e.target.value)})}
             />
@@ -56,6 +56,7 @@ class PostForm extends React.Component {
             <TextField
               id="standard-multiline-static"
               label="description"
+              color="secondary"
               multiline
               rows={5}
               style={{ margin: 10, width: 300 }}

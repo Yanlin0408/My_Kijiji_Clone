@@ -43,7 +43,7 @@ export default function RecipeReviewCard(props) {
           <Avatar
             aria-label="recipe"
             className={classes.avatar}
-            src={props.userPhoto}
+            src={props.post.userPhoto}
           />
         }
         action={
@@ -51,28 +51,28 @@ export default function RecipeReviewCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={props.userName}
-        subheader={props.createAt}
+        title={props.post.userName}
+        subheader={props.post.createAt}
       />
-      <CardActionArea>
+      <CardActionArea onClick = {()=> props.handleClick()}>
         <CardMedia
           style = {{width:"100%"}}
           className={classes.media}
-          image={props.image}
-          title={props.title}
+          image={"https://picspie.s3.ca-central-1.amazonaws.com/" + String(props.post.image)}
+          title={props.post.title}
         />
       </CardActionArea>
       
       <CardContent>
-        <Typography className = "text-center text-info bg-secondary" variant="body2" color="textSecondary" component="h3">
-          {props.title}
+        <Typography className = " text-info" variant="body2" color="textSecondary" component="h2">
+          {props.post.title}
         </Typography>
-        <Typography className = "text-center text-info " variant="body2" color="textSecondary" component="h4">
-          {"$ " + props.price}
+        <Typography className = " text-info " variant="body2" color="textSecondary" component="h4">
+          {"$ " + props.post.price}
         </Typography>
-        <Typography paragraph multiline rows = {4} variant="body1" color="textSecondary" component="p">
-          {props.content}
-        </Typography> 
+        {/* <Typography paragraph multiline rows = {4} variant="body1" color="textSecondary" component="p">
+          {props.post.content}
+        </Typography>  */}
       </CardContent>
     </Card>
   );
