@@ -66,6 +66,7 @@ class PostForm extends React.Component {
             <input
               type="file"
               accept="image/*"
+              label="choose file"
               style={{ margin: 10, width: 300 }}
               onChange={(e) => this.setState({ file: e.target.files[0] })}
             />
