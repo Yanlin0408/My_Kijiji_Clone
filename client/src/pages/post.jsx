@@ -1,21 +1,19 @@
 import React from "react";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import PinterestIcon from '@material-ui/icons/Pinterest';
-import InstagramIcon from '@material-ui/icons/Instagram';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import EmailIcon from '@material-ui/icons/Email';
 import EventIcon from '@material-ui/icons/Event';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import Card from "../assets/card";
+import Icons from "../components/post/icons"
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
 
 class PostPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { post: null};
   }
 
@@ -25,28 +23,33 @@ class PostPage extends React.Component {
     this.setState({ post });
   };
 
+  handleDelete = async() => {
+    const doc = await axios.post("api/post/" + this.props.match.params.id);
+  }
 
+  handleBuy = () => {
+    return (<Button variant="contained" color="secondary">Secondary</Button>);
+  }
 
   render() {
     const { post } = this.state;
+    const {currentUser} = this.props;
     return (
         <div class="jumbotron" style={{height: 1800}}>
-            <img src="https://tpc.googlesyndication.com/simgad/4880340395375037383" border="0" width="728" height="90" alt="" class="img_ad"></img>
+            <img src="https://tpc.googlesyndication.com/simgad/4880340395375037383" border="0" width="740" height="90" alt="" class="img_ad"></img>
+            <img src="https://s0.2mdn.net/9096388/LaysLunarNewYear6V3728X90EN.gif" border="0" width="740" height="90" alt="" class="img_ad" style = {{marginLeft: 30}}></img>
             <hr />  
             {
-              post?
+              currentUser && post?
               (
                 <div className="row">
                   {/* for resend section */}
-                  <div className="col-2">
-                    <FavoriteBorderIcon color = "default" fontSize = "large"/><br/><br/>
-                    <TwitterIcon color = "primary" fontSize = "large" onClick = {()=> {window.location = "https://twitter.com/"}}/><br/><br/>
-                    <FacebookIcon color = "primary" fontSize = "large" /><br/><br/>
-                    <PinterestIcon color = "secondary" fontSize = "large"/><br/><br/>
-                    <InstagramIcon color = "secondary" fontSize = "large"/><br/><br/>
+                  <div className="col-1">
+                    <Icons post = {post} user = {currentUser}/>
+                    {/* {console.log(post._id)} */}
                   </div>
                   {/* for AD main section */}
-                  <div className="col-6">
+                  <div className="col-7">
                     <div>
                       <h3> {post.title} </h3>
                       <h3 className = "text-success"> $ {post.price} </h3>
@@ -56,23 +59,38 @@ class PostPage extends React.Component {
                     </div>
                   </div>
                   {/* for comment section */}
-                  <div className="col-4">
-                    <Paper elevation={3} style={{backgroundColor:"#fbf6f0"}}>
-                    <h4 class="text-center">Owner Info</h4>
-                    <div className = "row" style = {{marginTop: 5, marginLeft:10}}><Avatar src={post.userPhoto} /> {post.userName}</div>
-                    <div className = "row" style = {{marginTop: 5, marginLeft:10}}><EmailIcon fontSize = "large"/> {post.userEmail}</div>
-                    <div className = "row" style = {{marginTop: 5, marginLeft:10}}><EventIcon fontSize = "large"/> {post.createAt}</div>
+                  <div className="col-4" style = {{marginTop:79}}>
+                    <Paper elevation={5} style={{backgroundColor:"#fbf6f0"}}>
+                      <div style = {{marginLeft: 10}}>
+                      <h4 class="text-center">Owner Info</h4>
+                        <div className = "row" style = {{marginTop: 5, marginLeft:10}}><Avatar src={post.userPhoto} /> <div style = {{marginLeft:5}}>{post.userName}</div></div>
+                        <div className = "row" style = {{marginTop: 15, marginLeft:10}}><EmailIcon fontSize = "large"/> <div style = {{marginLeft:10}}>{post.userEmail}</div></div>
+                        <div className = "row" style = {{marginTop: 15, marginLeft:10}}><EventIcon fontSize = "large"/> <div style = {{marginLeft:10}}>{post.createAt}</div></div>
+                        <IconButton>
+                          <PeopleAltIcon fontSize = "large" onClick = {()=> {window.location = "/user"}}/>
+                          <div style = {{marginLeft:10}}>
+                             click to check his page
+                          </div>
+                        </IconButton>
+                      </div>
                     </Paper>
+                    <div>
+                      {this.handleBuy()}
+                    </div>
+                    
                   </div>
                 </div>
                 ) 
               :
-              (<div>no page</div>)
+              (<div>processing</div>)
             }
         </div>
         
     );
   }
 }
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
 
-export default PostPage;
+export default connect(mapStateToProps)(PostPage);

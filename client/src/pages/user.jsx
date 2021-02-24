@@ -1,25 +1,33 @@
 import React from "react";
 import axios from "axios";
 import Card from "../assets/card";
+import { connect } from "react-redux";
 import { CardContent } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
 class UserPage extends React.Component {
-  constructor() {
-    super();
-    this.state = { posts: [] };
+  constructor(props) {
+    super(props);
+    this.state = { posts: [], user:null};
   }
 
   componentDidMount = async () => {
     const doc = await axios.get("/api/post/user/get");
+    const theUser = await axios.get("/auth/current_user");
     const posts = doc.data;
-    this.setState({ posts });
+    const user = theUser.data.displayName;
+    this.setState({ posts,user });
   };
 
   render() {
-    const { posts } = this.state;
+    const { posts, user } = this.state;
+    //const { currentUser } = this.props;
+    //console.log("---------current ",currentUser.balance);
     return (
       <div>
-        <div class="jumbotron">UserPage</div>
+        <div class="jumbotron">
+        <Typography variant="h3">{user}'s page</Typography>
+        </div>
         <div className="row">
           {posts.length !== 0 ? (
             posts.map((post) => (
@@ -47,4 +55,8 @@ class UserPage extends React.Component {
   }
 }
 
-export default UserPage;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(UserPage);

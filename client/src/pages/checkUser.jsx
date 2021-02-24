@@ -1,30 +1,27 @@
 import React from "react";
 import axios from "axios";
 import Card from "../assets/card";
+import { connect } from "react-redux";
 import { CardContent } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 
-class MainPage extends React.Component {
-  constructor() {
-    super();
-    this.state = { 
-      posts: [], 
-    };
-    
+class CheckUserPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { posts: [], user:null};
   }
 
   componentDidMount = async () => {
-    const doc = await axios.get("/api/post/all/get");
-    const posts = doc.data;
-    this.setState({ posts });
   };
 
   render() {
-    const { posts } = this.state;
+    const { posts, user } = this.state;
+    //const { currentUser } = this.props;
+    //console.log("---------current ",currentUser.balance);
     return (
       <div>
         <div class="jumbotron">
-          <h1>Main page</h1>
-          <hr/>
+        <Typography variant="h3">{user}'s page</Typography>
         </div>
         <div className="row">
           {posts.length !== 0 ? (
@@ -34,7 +31,7 @@ class MainPage extends React.Component {
               </CardContent>
             ))
           ) : (
-            <process />
+            <h1>nothing posted yet</h1>
           )}
         </div>
       </div>
@@ -42,4 +39,5 @@ class MainPage extends React.Component {
   }
 }
 
-export default MainPage;
+
+export default CheckUserPage;
