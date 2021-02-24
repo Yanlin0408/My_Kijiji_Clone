@@ -54,16 +54,19 @@ module.exports = (app) => {
         res.send(userPosts);
     });
 
+    //
     app.get("/api/post/all/get", async(req, res) => {
         const posts = await Post.find();
         res.send(posts);
     });
 
+    //find the post user currently click on
     app.get("/api/post/:id", async(req, res) => {
         const post = await Post.findById(req.params.id);
         res.send(post);
     });
 
+    //delete post
     app.post("/api/post/:id", requireLogin, async(req, res) => {
         await Post.findByIdAndDelete(req.params.id);
         res.send({});
