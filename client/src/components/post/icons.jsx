@@ -27,7 +27,6 @@ class Icons extends React.Component {
         console.log("----no error detected. Page rendered")
         return null;
       }
-      
   };
 
   renderLike = () => {
@@ -46,6 +45,7 @@ class Icons extends React.Component {
         <div className = "col">
             <IconButton onClick = {this.handleLike}>
                 {this.renderLike()}  
+                <div>{post.likes.length}</div>
             </IconButton>
             <IconButton>
             <TwitterIcon color = "primary" fontSize = "large" onClick = {()=> {window.location = "https://twitter.com/"}}/><br/><br/>

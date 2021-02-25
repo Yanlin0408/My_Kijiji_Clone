@@ -71,11 +71,16 @@ class Header extends React.Component {
           {<ul className="navbar-nav">{this.renderHeader()}</ul>}
         </div>
         <div >
-          <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
+          {/* <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
             <a href="/checkFav">
               <p class="text-muted">My Fav Items</p>
             </a>
-          </button>
+          </button> */}
+          <a href="/checkFav">
+            <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
+              <p class="text-muted">My Fav Items</p>
+            </button>
+          </a>
         </div>
       </nav>
     );
