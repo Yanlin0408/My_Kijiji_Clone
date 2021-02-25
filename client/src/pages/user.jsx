@@ -33,17 +33,6 @@ class UserPage extends React.Component {
             posts.map((post) => (
               <CardContent>
               <Card post={post} handleClick = {() => window.location="/post/"+post._id}/>
-              {/* <Card
-                userPhoto={post.userPhoto}
-                userName={post.userName}
-                createAt={post.createAt}
-                title={post.title}
-                price={post.price}
-                image={
-                  "https://picspie.s3.ca-central-1.amazonaws.com/" + post.image
-                }
-                content={post.content}
-              /> */}
               </CardContent>
             ))
           ) : (

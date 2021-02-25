@@ -30,8 +30,12 @@ module.exports = (app) => {
   // 这里就是我们说的，前端发送个API请求专门索取用户信息，后端可以从req.user当中接收到用户信息
   // 然后很容易地通过res.send(req.user)返回给前端用户信息。
   app.get("/auth/current_user", (req, res) => {
-    console.log("auth/current_user: ", req.user);
-    res.send(req.user);
+    try {
+      res.send(req.user);
+    } catch (e) {
+      console.log(e);
+    }
+    
     // store user in cookie, every request has the user
   });
 
