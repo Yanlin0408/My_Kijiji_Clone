@@ -23,7 +23,7 @@ class MainPage extends React.Component {
     return (
       <div>
         <div class="jumbotron">
-          <h1>Main page</h1>
+          <h1>Welcome to KijijiClone</h1>
           <hr/>
         </div>
         <div className="row">

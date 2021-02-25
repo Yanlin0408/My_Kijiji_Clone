@@ -11,7 +11,7 @@ const s3 = new AWS.S3({
     region: keys.Region,
 });
 
-function requireLogin(req, res, next) {
+function requireLogin (req, res, next) {
     if (!req.user) {
         res.redirect('/login');
     } else {
@@ -47,14 +47,13 @@ module.exports = (app) => {
         res.send({});
     });
 
+    //find all posts the user owns and return them
     app.get("/api/post/user/get", async(req, res) => {
         const posts = await Post.find();
-        //const userPosts = posts.filter((post) => post.userId === req.user.id);
         const userPosts = posts.filter((post) => post.userId === req.user.googleId);
         res.send(userPosts);
     });
 
-    //
     app.get("/api/post/all/get", async(req, res) => {
         const posts = await Post.find();
         res.send(posts);
@@ -67,9 +66,21 @@ module.exports = (app) => {
     });
 
     //delete post
+    //remove the post in database and also remove it in user's shoppingList                                 
     app.post("/api/post/:id", requireLogin, async(req, res) => {
         await Post.findByIdAndDelete(req.params.id);
         res.send({});
+    });
+
+    app.get("/api/like/fav", requireLogin, async(req, res) =>{
+        //get all posts from the database
+        const posts = await Post.find();
+        const favItems = posts.filter((post) => {
+            for (let singleLikeID of post.likes){
+                if(singleLikeID === req.user.id) return post;
+            } 
+        });
+        res.send(favItems);
     });
 
     //this API takes care of the inner changes in database 

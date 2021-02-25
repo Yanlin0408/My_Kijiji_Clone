@@ -4,6 +4,7 @@ import Header from "./components/header/header";
 import MainPage from "./pages/main";
 import UserPage from "./pages/user";
 import PostPage from "./pages/post";
+import CheckFavoritePage from "./pages/checkFav";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/actions";
@@ -33,6 +34,7 @@ class App extends React.Component {
           <Header />
           <Route exact path="/" component={MainPage} />
           <Route exact path="/user" component={UserPage} />
+          <Route exact path="/checkFav" component={CheckFavoritePage} />
           <Route path="/post/:id" component={PostPage} />
         </BrowserRouter>
       </div>

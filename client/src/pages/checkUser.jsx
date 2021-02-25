@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 class CheckUserPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [], user:null};
+    this.state = { posts: [], user: null };
   }
 
   componentDidMount = async () => {
@@ -16,23 +16,21 @@ class CheckUserPage extends React.Component {
 
   render() {
     const { posts, user } = this.state;
-    //const { currentUser } = this.props;
-    //console.log("---------current ",currentUser.balance);
     return (
       <div>
         <div class="jumbotron">
-        <Typography variant="h3">{user}'s page</Typography>
+          <Typography variant="h3">{user}'s page</Typography>
         </div>
         <div className="row">
           {posts.length !== 0 ? (
             posts.map((post) => (
               <CardContent>
-              <Card post={post} handleClick = {() => window.location="/post/"+post._id}/>
+                <Card post={post} handleClick = {() => window.location="/post/"+post._id}/>
               </CardContent>
             ))
           ) : (
-            <h1>nothing posted yet</h1>
-          )}
+              <h1>nothing posted yet</h1>
+            )}
         </div>
       </div>
     );
