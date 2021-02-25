@@ -19,7 +19,8 @@ mongoose
 // 设置 cookie session 环境
 app.use(
   cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
+    name: "session",
+    maxAge: 12 * 60 * 60 * 1000,
     keys: [keys.cookieKey],
   })
 );

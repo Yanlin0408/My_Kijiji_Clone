@@ -4,6 +4,7 @@ import Card from "../assets/card";
 import { connect } from "react-redux";
 import { CardContent } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 
 class UserPage extends React.Component {
   constructor(props) {
@@ -36,7 +37,10 @@ class UserPage extends React.Component {
               </CardContent>
             ))
           ) : (
-            <h1>nothing posted yet</h1>
+            <div className="row">
+                <HourglassEmptyIcon fontSize="large" style={{ marginTop: 20 }}></HourglassEmptyIcon>
+                <Typography variant="h3" style={{ marginLeft: 20 }}>processing ...</Typography>
+            </div>
           )}
         </div>
       </div>
