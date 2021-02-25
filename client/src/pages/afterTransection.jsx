@@ -1,11 +1,9 @@
 import React from "react";
-import axios from "axios";
-import Card from "../assets/card";
-import { connect } from "react-redux";
-import { CardContent } from "@material-ui/core";
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import IconButton from '@material-ui/core/IconButton';
 import Typography from "@material-ui/core/Typography";
 
-class CheckUserPage extends React.Component {
+class AfterTransection extends React.Component {
   constructor(props) {
     super(props);
     this.state = { posts: [], user: null };
@@ -15,22 +13,18 @@ class CheckUserPage extends React.Component {
   };
 
   render() {
-    const { posts, user } = this.state;
     return (
       <div>
         <div class="jumbotron">
-          <Typography variant="h3">{user}'s page</Typography>
+          <Typography variant="h3">Congradulations! The deal is done </Typography>
         </div>
-        <div className="row">
-          {posts.length !== 0 ? (
-            posts.map((post) => (
-              <CardContent>
-                <Card post={post} handleClick = {() => window.location="/post/"+post._id}/>
-              </CardContent>
-            ))
-          ) : (
-              <h1>nothing posted yet</h1>
-            )}
+        <div style={{ marginLeft: 50 }}>
+          <IconButton onClick={() => { window.location = "/" }}>
+            <InsertEmoticonIcon fontSize="large"/>
+              <div style={{ marginLeft: 10 }}>
+                click here to go back
+              </div>
+          </IconButton>
         </div>
       </div>
     );
@@ -38,4 +32,4 @@ class CheckUserPage extends React.Component {
 }
 
 
-export default CheckUserPage;
+export default AfterTransection;
