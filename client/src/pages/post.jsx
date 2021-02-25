@@ -77,9 +77,18 @@ class PostPage extends React.Component {
                     </div>
                   </Paper>
                   <div>
+                    {/* <div>nono</div> */}
+                    {currentUser.googleId === post.userId?
                     <Button variant="contained" color="secondary" onClick={this.handleDelete}>
                       <a className="navbar-brand" href="/user">Delete this post</a>
                     </Button>
+                    :
+                    <div>
+                      <Button variant="contained" color="primary" onClick={this.handleBuy}>
+                        <a className="navbar-brand" href="/"><p class="text-light">BUY</p></a>
+                      </Button>
+                    </div>
+                    }                    
                   </div>
                 </div>
               </div>

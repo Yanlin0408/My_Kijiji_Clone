@@ -5,28 +5,21 @@ import { connect } from "react-redux";
 import { CardContent } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
-class CheckFavoritePage extends React.Component {
+class CheckUserPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [], userName: null };
+    this.state = { posts: [], user: null };
   }
 
   componentDidMount = async () => {
-    try {
-      const doc = await axios.get("/api/like/fav");
-      this.setState({ posts: doc.data });
-    } catch (e) {
-      console.log("frontend error", e);
-    }
   };
 
   render() {
-    const { posts } = this.state;
-    const { currentUser } = this.props;
+    const { posts, user } = this.state;
     return (
       <div>
         <div class="jumbotron">
-          <Typography variant="h3">{currentUser ? currentUser.displayName : null}'s favorite items</Typography>
+          <Typography variant="h3">{user}'s page</Typography>
         </div>
         <div className="row">
           {posts.length !== 0 ? (
@@ -44,8 +37,5 @@ class CheckFavoritePage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-});
 
-export default connect(mapStateToProps)(CheckFavoritePage);
+export default CheckUserPage;
