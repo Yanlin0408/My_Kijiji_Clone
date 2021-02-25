@@ -30,8 +30,6 @@ class PostPage extends React.Component {
 
   handleBuy = async () => {
     const doc = await axios.post("/api/buy/" + this.props.match.params.id);
-    console.log("---------------it is doing shit")
-    // return (<Button variant="contained" color="secondary">Secondary</Button>);
   }
 
   handleCheckEachOther = async() => {
