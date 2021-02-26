@@ -24,6 +24,10 @@ class MainPage extends React.Component {
       <div>
         <div class="jumbotron">
           <h1>Welcome to KijijiClone</h1>
+          <hr />
+            <p className="lead text-monospace">
+              KijijiClone is an online advertising platform for people to buy and sell commodities!
+            </p>
           <hr/>
         </div>
         <div className="row">

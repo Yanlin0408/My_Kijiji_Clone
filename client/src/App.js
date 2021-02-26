@@ -5,6 +5,8 @@ import MainPage from "./pages/main";
 import UserPage from "./pages/user";
 import PostPage from "./pages/post";
 import CheckFavoritePage from "./pages/checkFav";
+import AfterTransection from "./pages/afterTransection";
+import CheckUserPage from "./pages/checkUser";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/actions";
@@ -35,7 +37,9 @@ class App extends React.Component {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/user" component={UserPage} />
           <Route exact path="/checkFav" component={CheckFavoritePage} />
+          <Route exact path="/afterTransection" component={AfterTransection} />
           <Route path="/post/:id" component={PostPage} />
+          <Route path="/checkUser/:id" component={CheckUserPage} />
         </BrowserRouter>
       </div>
     ); 

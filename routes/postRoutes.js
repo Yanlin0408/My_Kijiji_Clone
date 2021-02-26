@@ -54,6 +54,19 @@ module.exports = (app) => {
         res.send(userPosts);
     });
 
+    //return the user's information after we checkout him
+    app.get("/api/getAfterCheck/:userId", async(req, res)=>{
+        const user = await User.findById(req.params.userId);
+        res.send(user);
+    })
+
+    app.get("/api/getUser'sPosts/:userId",async(req,res)=>{
+        const user = await User.findById(req.params.userId);
+        const posts = await Post.find();
+        const postsWeWant = posts.filter((post) => post.userId === user.googleId);
+        res.send(postsWeWant);
+    })
+
     app.get("/api/post/all/get", async(req, res) => {
         const posts = await Post.find();
         res.send(posts);
@@ -81,6 +94,29 @@ module.exports = (app) => {
             } 
         });
         res.send(favItems);
+    });
+
+    app.post("/api/buy/:postId", requireLogin, async(req, res) =>{
+        const user = await User.findById(req.user.id);
+        const post = await Post.findById(req.params.postId);
+        var balance = user.balance;
+        balance = balance - post.price;
+        await User.findByIdAndUpdate(req.user.id, { balance });
+        const allUsers = await User.find();
+        const sellerList = allUsers.filter((singleUser) => {return singleUser.googleId === post.userId});
+        const seller = sellerList[0]
+        const sellerBalance = seller.balance;
+        balance = sellerBalance + post.price;
+        await User.findByIdAndUpdate(seller._id, { balance });
+        res.send({});
+    });
+
+    app.get("/api/getUserIdBasedOnPost/:postId", requireLogin, async(req, res) =>{
+        const post = await Post.findById(req.params.postId);
+        const allUsers = await User.find();
+        const sellerList = allUsers.filter((singleUser) => {return singleUser.googleId === post.userId});
+        const sellerId = sellerList[0]._id;
+        res.send(sellerId);
     });
 
     //this API takes care of the inner changes in database 

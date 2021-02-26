@@ -28,9 +28,14 @@ class PostPage extends React.Component {
     const doc = await axios.post("/api/post/" + this.props.match.params.id);
   }
 
-  handleBuy = () => {
-    //const doc = await axios.post("api/post/" + this.props.match.params.id);
-    return (<Button variant="contained" color="secondary">Secondary</Button>);
+  handleBuy = async () => {
+    const doc = await axios.post("/api/buy/" + this.props.match.params.id);
+  }
+
+  handleCheckEachOther = async() => {
+    const doc = await axios.get("/api/getUserIdBasedOnPost/" + this.props.match.params.id);
+    console.log(doc);
+    window.location = "/checkUser/"+doc.data;
   }
 
   render() {
@@ -68,16 +73,15 @@ class PostPage extends React.Component {
                       <div className="row" style={{ marginTop: 5, marginLeft: 10 }}><Avatar src={post.userPhoto} /> <div style={{ marginLeft: 5 }}>{post.userName}</div></div>
                       <div className="row" style={{ marginTop: 15, marginLeft: 10 }}><EmailIcon fontSize="large" /> <div style={{ marginLeft: 10 }}>{post.userEmail}</div></div>
                       <div className="row" style={{ marginTop: 15, marginLeft: 10 }}><EventIcon fontSize="large" /> <div style={{ marginLeft: 10 }}>{post.createAt}</div></div>
-                      <IconButton>
-                        <PeopleAltIcon fontSize="large" onClick={() => { window.location = "/user" }} />
+                      <IconButton  onClick={this.handleCheckEachOther}>
+                        <PeopleAltIcon fontSize="large" />
                         <div style={{ marginLeft: 10 }}>
                           click to check his page
-                          </div>
+                        </div>
                       </IconButton>
                     </div>
                   </Paper>
                   <div>
-                    {/* <div>nono</div> */}
                     {currentUser.googleId === post.userId?
                     <Button variant="contained" color="secondary" onClick={this.handleDelete}>
                       <a className="navbar-brand" href="/user">Delete this post</a>
@@ -85,7 +89,7 @@ class PostPage extends React.Component {
                     :
                     <div>
                       <Button variant="contained" color="primary" onClick={this.handleBuy}>
-                        <a className="navbar-brand" href="/"><p class="text-light">BUY</p></a>
+                        <a className="navbar-brand" href="/afterTransection"><p class="text-light">BUY</p></a>
                       </Button>
                     </div>
                     }                    

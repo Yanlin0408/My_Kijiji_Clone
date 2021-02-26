@@ -19,7 +19,8 @@ mongoose
 // 设置 cookie session 环境
 app.use(
   cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,
+    name: "session",
+    maxAge: 12 * 60 * 60 * 1000,
     keys: [keys.cookieKey],
   })
 );
@@ -43,4 +44,15 @@ require("./services/passport");
 require("./routes/authRoutes")(app);
 require("./routes/postRoutes")(app);
 
-app.listen(4000, () => console.log("Listen to 4000"));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log("Listen to " + PORT));
+//app.listen(PORT, () => console.log("Listen to 4000"));
+// app.listen(4000, () => console.log("Listen to 4000"));

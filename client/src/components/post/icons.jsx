@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import Typography from "@material-ui/core/Typography";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -40,7 +39,7 @@ class Icons extends React.Component {
   }
 
   render() {
-    const {post, user} = this.props;
+    const {post} = this.props;
     return (
         <div className = "col">
             <IconButton onClick = {this.handleLike}>
