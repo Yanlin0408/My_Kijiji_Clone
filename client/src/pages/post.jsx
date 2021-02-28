@@ -60,7 +60,7 @@ class PostPage extends React.Component {
                   <div>
                     <h3> {post.title} </h3>
                     <h3 className="text-success"> $ {post.price} </h3>
-                    <img src={"https://picspie.s3.ca-central-1.amazonaws.com/" + post.image} width="100%"></img>
+                    <img src={"https://kijijiclones3.s3.ca-central-1.amazonaws.com/" + post.image} width="100%"></img>
                     <h3 style={{ marginTop: 35 }}>Description</h3>
                     <h6 class="text-justify">{post.content}</h6>
                   </div>
