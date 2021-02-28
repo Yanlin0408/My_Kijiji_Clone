@@ -36,7 +36,7 @@ class CheckFavoritePage extends React.Component {
               </CardContent>
             ))
           ) : (
-              <h1>nothing posted yet</h1>
+              <h1>   you haven't liked any post yet</h1>
             )}
         </div>
       </div>

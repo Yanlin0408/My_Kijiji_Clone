@@ -39,14 +39,14 @@ class Header extends React.Component {
                 </a>
               </li>
             </div>
-            <div className="col-3">
+            <div className="col-2">
               <li class="nav-item">
                 <a class="nav-link" style={{ margin: 10, width: 100 }}>
                   balance: {currentUser.balance}
                 </a>
               </li>
             </div>
-            <div className="col-3" style={{ marginTop: 10 }}>
+            <div className="col-2" style={{ marginTop: 10 }}>
               {show === true ?
                 (<div style={{ marginTop: 12 }}>
                   <button type="button" class="btn btn-outline-secondary bg-light" variant="outlined" onClick={() => this.setState({ show: !show })}>close</button>
@@ -56,7 +56,7 @@ class Header extends React.Component {
                 : (<button style={{ marginTop: 12 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined" onClick={() => this.setState({ show: !show })}>post Ad</button>)
               }
             </div>
-            <div >
+            <div className="col-2">
               <a href="/checkFav">
                 <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
                   <p class="text-muted">My Fav Items</p>
@@ -77,13 +77,6 @@ class Header extends React.Component {
         <div >
           {<ul className="navbar-nav">{this.renderHeader()}</ul>}
         </div>
-        {/* <div >
-          <a href="/checkFav">
-            <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
-              <p class="text-muted">My Fav Items</p>
-            </button>
-          </a>
-        </div> */}
       </nav>
     );
   }
