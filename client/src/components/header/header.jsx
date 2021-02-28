@@ -56,6 +56,13 @@ class Header extends React.Component {
                 : (<button style={{ marginTop: 12 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined" onClick={() => this.setState({ show: !show })}>post Ad</button>)
               }
             </div>
+            <div >
+              <a href="/checkFav">
+                <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
+                  <p class="text-muted">My Fav Items</p>
+                </button>
+              </a>
+            </div>
           </div>
         );
     }
@@ -70,18 +77,13 @@ class Header extends React.Component {
         <div >
           {<ul className="navbar-nav">{this.renderHeader()}</ul>}
         </div>
-        <div >
-          {/* <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
-            <a href="/checkFav">
-              <p class="text-muted">My Fav Items</p>
-            </a>
-          </button> */}
+        {/* <div >
           <a href="/checkFav">
             <button style={{ marginTop: 1, marginLeft: 40 }} type="button" class="btn btn-outline-secondary bg-light" variant="outlined">
               <p class="text-muted">My Fav Items</p>
             </button>
           </a>
-        </div>
+        </div> */}
       </nav>
     );
   }
