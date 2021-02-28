@@ -26,7 +26,7 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       // callbackURL: "/auth/google/callback",
-      callbackURL: "https://kijijiclone.herokuapp.com/auth/google/callback",
+      callbackURL: "/auth/google/callback",
       proxy: true,
       // this callbackurl is our service’s url,
       // this needs to be set up in the google API redirect url.

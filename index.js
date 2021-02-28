@@ -5,8 +5,6 @@ const { json } = require("body-parser");
 const app = express();
 const mongoose = require("mongoose");
 const keys = require("./config/keys");
-
-
 app.use(json());
 
 mongoose
@@ -54,5 +52,3 @@ if (process.env.NODE_ENV === "production") {
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log("Listen to " + PORT));
-//app.listen(PORT, () => console.log("Listen to 4000"));
-// app.listen(4000, () => console.log("Listen to 4000"));

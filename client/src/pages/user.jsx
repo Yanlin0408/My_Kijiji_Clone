@@ -22,8 +22,6 @@ class UserPage extends React.Component {
 
   render() {
     const { posts, user } = this.state;
-    //const { currentUser } = this.props;
-    //console.log("---------current ",currentUser.balance);
     return (
       <div>
         <div class="jumbotron">
