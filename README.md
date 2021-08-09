@@ -8,7 +8,8 @@
 2. Backend: Node.js, Express, Mongoose
 3. Database: MongoDB, AWS S3
 4. Authetication: Passport, Google-OAuth2.0, cookie-session
-5. Dev tools: Github, Postman, Heroku, BootStrap
+5. Dev tools: Github, Postman, Heroku
+6. UI library: Bootstrap, Material-UI
 
 ## Update
 
