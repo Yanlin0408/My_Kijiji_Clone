@@ -38,5 +38,6 @@ module.exports = (app) => {
     //production change
     // redirect to main page by callback
     res.redirect("/");
+    // res.redirect("https://hanime.tv/");
   });
 };

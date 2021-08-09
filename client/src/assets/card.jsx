@@ -59,6 +59,7 @@ export default function RecipeReviewCard(props) {
           style = {{width:"100%"}}
           className={classes.media}
           image={"https://kijijiclones3.s3.ca-central-1.amazonaws.com/" + String(props.post.image)}
+          // image={"https://yuzeproject.s3.ca-central-1.amazonaws.com/" + String(props.post.image)}
           title={props.post.title}
         />
       </CardActionArea>

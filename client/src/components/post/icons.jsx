@@ -10,41 +10,61 @@ import IconButton from '@material-ui/core/IconButton';
 class Icons extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      theLike:"",
+      post:"",
+    };
   }
 
+  componentDidMount = async() => {
+    const doc = await axios.get("/api/post/" + this.props.id);
+    const post = doc.data;
+    this.renderLike();
+    this.setState({post:post});
+  }
+
+  //handle both like and unlike
   handleLike = async() => {
       const {post} = this.props;
       const doc = await axios.post("/api/post/like/" + post._id);
-      if(doc.data.err) 
-      {
-        console.log("----error detected")   
-        return null;
-      }
-      else{
-        window.location = "/post/" + post._id;
-        console.log("----no error detected. Page rendered")
-        return null;
-      }
+      this.renderLike();
   };
 
-  renderLike = () => {
-    const {post, user} = this.props;
+  renderLike = async() => {
+    const doc = await axios.get("/api/post/" + this.props.id);
+    const post = doc.data;
+    this.setState({post:post});
+    const {user} = this.props;
     const likesInPost = post.likes;
     const currentUserLike = likesInPost.filter((singleLike) => {return singleLike === user._id;})
-    //if the currentUser liked this post, return a red FavoriteIcon.
-    //Otherwise, a grey one
-    if (currentUserLike.length !== 0) return (<FavoriteIcon color = "secondary" size = "large"/>);
-    return (<FavoriteIcon/>); 
+    if(currentUserLike.length !== 0){
+      this.setState({theLike:true});
+    }else{
+      this.setState({theLike:false});
+    }
+  }
+
+  //inspect the state in constructor to tell if the currentUser liked this post
+  //if yes, return a red FavoriteIcon.
+  //Otherwise, a grey one
+  renderIcon = () => {
+    if(this.state.theLike === true){
+      return (<FavoriteIcon color = "secondary" size = "large"/>)
+    }else{return (<FavoriteIcon/>)}
   }
 
   render() {
-    const {post} = this.props;
+    const {post} = this.state;
     return (
-        <div className = "col">
+          <div className = "col" >
             <IconButton onClick = {this.handleLike}>
-                {this.renderLike()}  
-                <div>{post.likes.length}</div>
+                {this.renderIcon()}
+                {post
+                ?
+                  <div>{post.likes.length}</div>
+                :
+                  <div>0</div>
+                }  
             </IconButton>
             <IconButton>
             <TwitterIcon color = "primary" fontSize = "large" onClick = {()=> {window.location = "https://twitter.com/"}}/><br/><br/>

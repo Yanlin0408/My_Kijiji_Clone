@@ -15,6 +15,7 @@ class PostForm extends React.Component {
   }
  
   handleSubmit = async () => {
+    
     const { file, title, content, price } = this.state;
     // get API from AWS
     const config = await axios.get("/api/image/upload");
@@ -28,7 +29,8 @@ class PostForm extends React.Component {
         "Content-type": file.type,
       },
     });
-    // save URL and title, content into DB
+    console.log("yoooooo!");
+    // save URL and title, content into mongoDB
     await axios.post("/api/post/create", {  title, content, imageURL, price, });
     // redirect to user page
     window.location = "/user";
@@ -39,8 +41,7 @@ class PostForm extends React.Component {
       <div>
           <Container>
             <TextField
-              id="standard-basic"
-              label="Title"
+            id="filled-basic" label="Title" variant="filled"
               color="secondary"
               style={{ margin: 10, width: 300 }}
               onChange={(e) => this.setState({ title: e.target.value })}
@@ -49,6 +50,7 @@ class PostForm extends React.Component {
               id="standard-basic"
               label="Price"
               color="secondary"
+              variant="filled"
               style={{ margin: 10, width: 300 }}
               onChange={(e) => this.setState({ price: Number(e.target.value)})}
             />
@@ -57,6 +59,7 @@ class PostForm extends React.Component {
               id="standard-multiline-static"
               label="description"
               color="secondary"
+              variant="filled"
               multiline
               rows={5}
               style={{ margin: 10, width: 300 }}

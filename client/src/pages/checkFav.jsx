@@ -25,7 +25,7 @@ class CheckFavoritePage extends React.Component {
     const { currentUser } = this.props;
     return (
       <div>
-        <div class="jumbotron">
+        <div class="jumbotron" style = {{marginTop:50}}>
           <Typography variant="h3">{currentUser ? currentUser.displayName : null}'s favorite items</Typography>
         </div>
         <div className="row">

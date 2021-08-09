@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Card from "../assets/card";
+import Typography from "@material-ui/core/Typography";
 import { CardContent } from "@material-ui/core";
 
 class MainPage extends React.Component {
@@ -22,7 +23,7 @@ class MainPage extends React.Component {
     const { posts } = this.state;
     return (
       <div>
-        <div class="jumbotron">
+        <div className="jumbotron" style = {{marginTop:50}}>
           <h1>Welcome to KijijiClone</h1>
           <hr />
             <p className="lead text-monospace">
@@ -38,7 +39,7 @@ class MainPage extends React.Component {
               </CardContent>
             ))
           ) : (
-            <process />
+            <Typography variant="h3" style={{ marginLeft: 20 }}>processing ...</Typography>
           )}
         </div>
       </div>

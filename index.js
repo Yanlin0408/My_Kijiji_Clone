@@ -34,6 +34,7 @@ app.use(passport.session()); // 创建完实例，我们才能创建session实�
 // require the mongoose model, before passport
 require("./models/user");
 require("./models/post");
+require("./models/comment");
 
 require("./services/passport");
 
@@ -41,6 +42,7 @@ require("./services/passport");
 // authRoutes 其实就是user route，用来写所有和user有关的api
 require("./routes/authRoutes")(app);
 require("./routes/postRoutes")(app);
+require("./routes/commentRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

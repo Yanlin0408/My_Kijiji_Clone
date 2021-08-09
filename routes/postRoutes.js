@@ -4,6 +4,7 @@ const User = mongoose.model("users");
 const AWS = require("aws-sdk");
 const keys = require("../config/keys");
 const uuid = require("uuid/v1");
+const requireLogin = require("../middleWares/requireLogin");
 
 const s3 = new AWS.S3({
     accessKeyId: keys.AWSKeyId,
@@ -11,15 +12,28 @@ const s3 = new AWS.S3({
     region: keys.Region,
 });
 
-function requireLogin (req, res, next) {
-    if (!req.user) {
-        res.redirect('/login');
-    } else {
-        next();
-    }
-};
+// function requireLogin (req, res, next) {
+//     if (!req.user) {
+//         console.log(" ----- no user!!");
+//         // (res, req) => {
+//         //     res.redirect('/');
+//         // }
+//         // return res.status(401).send({ error: " ------ you must login!" });
+//         // res.redirect('/');
+//         res.send({redirectUrl:'/'});
+//     } else {
+//         next();
+//     }
+// };
 
+//it is exported to whoever "require" it
 module.exports = (app) => {
+    //find the post user currently click on
+    app.get("/api/post/:id", async(req, res) => {
+        const post = await Post.findById(req.params.id);
+        res.send(post);
+    });
+
     app.get("/api/image/upload", async(req, res) => {
         const key = `${req.user.id}/${uuid()}.jpeg`;
         s3.getSignedUrl(
@@ -32,6 +46,7 @@ module.exports = (app) => {
         );
     });
 
+    // create a new instance in "posts" collection in mongoDB
     app.post("/api/post/create", async(req, res) => {
         await new Post({
             title: req.body.title,
@@ -47,7 +62,7 @@ module.exports = (app) => {
         res.send({});
     });
 
-    //find all posts the user owns and return them
+    //find all posts the current user owns and return them
     app.get("/api/post/user/get", async(req, res) => {
         const posts = await Post.find();
         const userPosts = posts.filter((post) => post.userId === req.user.googleId);
@@ -60,6 +75,7 @@ module.exports = (app) => {
         res.send(user);
     })
 
+    //find all posts the targeted user owns and return them
     app.get("/api/getUser'sPosts/:userId",async(req,res)=>{
         const user = await User.findById(req.params.userId);
         const posts = await Post.find();
@@ -67,15 +83,10 @@ module.exports = (app) => {
         res.send(postsWeWant);
     })
 
+    //return all the posts we have in database
     app.get("/api/post/all/get", async(req, res) => {
         const posts = await Post.find();
         res.send(posts);
-    });
-
-    //find the post user currently click on
-    app.get("/api/post/:id", async(req, res) => {
-        const post = await Post.findById(req.params.id);
-        res.send(post);
     });
 
     //delete post
@@ -85,6 +96,7 @@ module.exports = (app) => {
         res.send({});
     });
 
+    //like post you are checking
     app.get("/api/like/fav", requireLogin, async(req, res) =>{
         //get all posts from the database
         const posts = await Post.find();
@@ -96,11 +108,13 @@ module.exports = (app) => {
         res.send(favItems);
     });
 
+    //handle purchase after clicking "buy" button
     app.post("/api/buy/:postId", requireLogin, async(req, res) =>{
         const user = await User.findById(req.user.id);
         const post = await Post.findById(req.params.postId);
         var balance = user.balance;
         balance = balance - post.price;
+        const buyerBalance = balance;
         await User.findByIdAndUpdate(req.user.id, { balance });
         const allUsers = await User.find();
         const sellerList = allUsers.filter((singleUser) => {return singleUser.googleId === post.userId});
@@ -108,9 +122,10 @@ module.exports = (app) => {
         const sellerBalance = seller.balance;
         balance = sellerBalance + post.price;
         await User.findByIdAndUpdate(seller._id, { balance });
-        res.send({});
+        res.send({buyerBalance});
     });
 
+    //find the seller's id
     app.get("/api/getUserIdBasedOnPost/:postId", requireLogin, async(req, res) =>{
         const post = await Post.findById(req.params.postId);
         const allUsers = await User.find();
