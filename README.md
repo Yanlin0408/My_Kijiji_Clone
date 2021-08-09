@@ -2,6 +2,8 @@
 
 ## Description
 
+# Kijiji Clone is a mock trading platform
+
 ## Technology
 
 1. Frontend: React, Redux (logger)
