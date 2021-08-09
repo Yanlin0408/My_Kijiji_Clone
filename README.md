@@ -12,9 +12,18 @@
 
 ## Update
 
+# 2021.08.09 V 1.2
+
+1. build comment system
+2. make comment/like operations dynamic
+3. upgraded header
+4. change aftertransaction page to an alert
+5. remake login page
+6. made scrolling ads
+
 # 2021.02.25 V 1.1
 
-1. user can like posts
+1. user can like and unlike posts
 2. delete function
 3. buy function
 4. user can check each other's user page

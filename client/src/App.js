@@ -37,7 +37,6 @@ class App extends React.Component {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/user" component={UserPage} />
           <Route exact path="/checkFav" component={CheckFavoritePage} />
-          <Route exact path="/afterTransection" component={AfterTransection} />
           <Route path="/post/:id" component={PostPage} />
           <Route path="/checkUser/:id" component={CheckUserPage} />
         </BrowserRouter>
