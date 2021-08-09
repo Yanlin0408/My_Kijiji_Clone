@@ -20,6 +20,7 @@
 4. change aftertransaction page to an alert
 5. remake login page
 6. made scrolling ads
+7. user can use different sorting mechanism
 
 # 2021.02.25 V 1.1
 

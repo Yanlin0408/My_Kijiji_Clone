@@ -71,29 +71,6 @@ class Header extends React.Component {
                <button style={{ marginTop: 10 }} type="button" class="btn btn-light">My Favorites</button>
                </a> 
              </div>
-             <div class="dropdown">
-                <button style={{ marginTop: 10, marginLeft: 40 }} class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Sort by
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-             </div>
-             {/* <div>
-               <a href="/checkFav">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style = {{marginLeft: "auto", marginRight:20}}
-                    endIcon={<SortIcon />}
-                    // onClick = {()=> props.deleteFunc(props.comment._id)}
-                    >
-                      Remove
-                  </Button>
-               </a> 
-             </div> */}
             </ul>
             <div>
                {show === true ?

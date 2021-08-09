@@ -24,7 +24,7 @@ class UserPage extends React.Component {
     const { posts, user } = this.state;
     return (
       <div>
-        <div class="jumbotron">
+        <div class="jumbotron" style = {{marginTop:50}}>
         <Typography variant="h3">{user}'s page</Typography>
         </div>
         <div className="row">

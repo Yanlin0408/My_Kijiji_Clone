@@ -39,12 +39,12 @@ export default function SimpleCard(props) {
                   </div>
               <h6>{props.comment.commentContent}</h6>
               <div className = "row" style = {{display: 'flex', justifyContent: 'flex-end'}}>
-                  <ThumbUpIcon style = {{marginLeft:15,marginTop:5}}></ThumbUpIcon>
-                  <ThumbDownIcon style = {{marginLeft:15,marginTop:6}}></ThumbDownIcon>
+                  {/* <ThumbUpIcon style = {{marginLeft:15,marginTop:5}}></ThumbUpIcon>
+                  <ThumbDownIcon style = {{marginLeft:15,marginTop:6}}></ThumbDownIcon> */}
                     <Button
                     variant="contained"
                     color="primary"
-                    style = {{marginLeft: "auto", marginRight:20}}
+                    style = {{marginTop: -30, marginLeft: "auto", marginRight:20}}
                     endIcon={<DeleteIcon />}
                     onClick = {()=> props.deleteFunc(props.comment._id)}
                     >

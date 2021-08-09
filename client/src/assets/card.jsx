@@ -66,14 +66,12 @@ export default function RecipeReviewCard(props) {
       
       <CardContent>
         <Typography className = " text-info" variant="body2" color="textSecondary" component="h2">
-          {props.post.title}
+          {props.post.title} 
         </Typography>
+        {/* <FavoriteIcon color = "secondary" style = {{ marginRight:10}}></FavoriteIcon> */}
         <Typography className = " text-info " variant="body2" color="textSecondary" component="h4">
           {"$ " + props.post.price}
         </Typography>
-        {/* <Typography paragraph multiline rows = {4} variant="body1" color="textSecondary" component="p">
-          {props.post.content}
-        </Typography>  */}
       </CardContent>
     </Card>
   );

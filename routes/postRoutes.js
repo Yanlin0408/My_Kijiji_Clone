@@ -89,6 +89,38 @@ module.exports = (app) => {
         res.send(posts);
     });
 
+    //return all the posts sorted by price
+    app.get("/api/post/sort/byPrice", async(req, res) => {
+        const posts = await Post.find();
+        posts.sort((a, b) => a.price - b.price);
+        console.log(posts);
+        res.send(posts);
+    });
+
+    //return all the posts sorted by price
+    app.get("/api/post/sort/byPriceHighToLow", async(req, res) => {
+        const posts = await Post.find();
+        posts.sort((a, b) => b.price - a.price);
+        console.log(posts);
+        res.send(posts);
+    });
+
+    //return all the posts sorted by date
+    app.get("/api/post/sort/byDate", async(req, res) => {
+        const posts = await Post.find();
+        posts.sort((a, b) => b.createAt - a.createAt);
+        console.log(posts);
+        res.send(posts);
+    });
+
+    //return all the posts sorted by alphabet
+    app.get("/api/post/sort/byPopularity", async(req, res) => {
+        const posts = await Post.find();
+        posts.sort((a, b) => b.likes.length - a.likes.length);
+        console.log(posts);
+        res.send(posts);
+    });
+
     //delete post
     //remove the post in database and also remove it in user's shoppingList                                 
     app.post("/api/post/:id", requireLogin, async(req, res) => {
@@ -172,4 +204,6 @@ module.exports = (app) => {
             res.send({});
         }
     });
+
+    
 };
