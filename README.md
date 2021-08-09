@@ -1,8 +1,6 @@
 # Kijiji Clone
 
-## Description
-
-# Kijiji Clone is a mock trading platform
+## Description: Kijiji Clone is a mock trading platform
 
 ## Technology
 
