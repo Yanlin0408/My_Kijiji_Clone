@@ -20,28 +20,27 @@ class MainPage extends React.Component {
   }
 
   componentDidMount = async () => {
-    console.log(this.state.sortingMethod);
     this.sortByDiffMethods(this.state.sortingMethod);
   };
 
   sortByDiffMethods = async(sortingMethod) => {
     switch(sortingMethod) {
-      case "priceLowToHigh":
+      case "price Low To High":
         var doc = await axios.get("/api/post/sort/byPrice");
         var posts = doc.data;
         this.setState({posts:posts, sortingMethod:"price Low To High"});
         break;
-      case "priceHighToLow":
+      case "price High To Low":
         doc = await axios.get("/api/post/sort/byPriceHighToLow");
         posts = doc.data;
         this.setState({ posts:posts, sortingMethod: "price High To Low" });
         break;
-      case "byDate":
+      case "Latest First":
         doc = await axios.get("/api/post/sort/byDate");
         posts = doc.data;
         this.setState({ posts:posts, sortingMethod:"Latest First" });
         break;
-      case "byPopularity":
+      case "Popularity":
         doc = await axios.get("/api/post/sort/byPopularity");
         posts = doc.data;
         this.setState({ posts:posts, sortingMethod:"Popularity" });
@@ -71,11 +70,11 @@ class MainPage extends React.Component {
                   Sort by
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("priceLowToHigh")}}>By Price low to high</a>
-                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("priceHighToLow")}}>By Price high to low</a>
-                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("byDate")}}>Newest</a>
-                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("byDateOldest")}}>Oldest</a>
-                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("byPopularity")}}>By popularity</a>
+                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("price Low To High")}}>By Price low to high</a>
+                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("price High To Low")}}>By Price high to low</a>
+                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("Latest First")}}>Newest</a>
+                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("Oldest First")}}>Oldest</a>
+                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("Popularity")}}>By popularity</a>
                 </div>
         </div>
         <p style = {{marginLeft:20}} className="lead text-monospace">

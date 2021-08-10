@@ -125,7 +125,7 @@ class PostPage extends React.Component {
                       {
                       setTimeout(() => {
                       this.handleLocation()
-                      }, 2000)}
+                      }, 1500)}
                     </div>
                   </div>
                   :
