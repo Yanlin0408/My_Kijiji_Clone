@@ -14,6 +14,7 @@ import Timer from "../assets/timer";
 import CommentForm from "../components/comment/commentForm"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import Popup from "../assets/alertPop"
+import Tooltip from "../assets/tooltip"
 
 class PostPage extends React.Component {
   constructor(props) {
@@ -103,7 +104,7 @@ class PostPage extends React.Component {
                     <Paper elevation={1} style={{ backgroundColor:"#E9ECEF", padding:10 }}>
                       <div style={{ marginLeft: 10, marginTop: 15 }}>
                         <h4 class="text-center">Owner Info <PeopleAltIcon fontSize="medium" /></h4>
-                        <div className="row" style={{ marginTop: 10, marginLeft: 10 }}><Avatar src={post.userPhoto} /> <Button variant="contained" color="primary" style = {{marginLeft:8}} onClick={this.handleCheckEachOther}>{post.userName}</Button></div>
+                        <div className="row" style={{ marginTop: 10, marginLeft: 10 }}><Avatar src={post.userPhoto} /><Tooltip checkEachOther={this.handleCheckEachOther} userName = {this.state.post.userName}></Tooltip> </div> 
                         <div className="row" style={{ marginTop: 15, marginLeft: 10 }}><EmailIcon fontSize="large" /> <div style={{ marginLeft: 10 }}>{post.userEmail}</div></div>
                         <div className="row" style={{ marginTop: 15, marginLeft: 10 }}><EventIcon fontSize="large" /> <div style={{ marginLeft: 10 }}>{post.createAt}</div></div>
                       </div>

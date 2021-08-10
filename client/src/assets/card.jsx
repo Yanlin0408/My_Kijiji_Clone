@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { CardActionArea } from "@material-ui/core";
+import { TableRow } from '@material-ui/core';
+import { Table } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,16 +34,45 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  tr: {
+    background: "#f1f1f1",
+    '&:hover': {
+      background: "#f00",
+    }
+  }
 }));
 
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
-      <CardHeader
+      {/* <CardHeader
+        onHover={<div> Show this on hover </div>}
         avatar={
           <Avatar
             aria-label="recipe"
+            
+            className={classes.avatar}
+            src={props.post.userPhoto}
+          />
+        }
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }
+        title={props.post.userName}
+        subheader={props.post.createAt}
+      /> */}
+      <Table>
+      <TableRow className={classes.tr}>
+        {/* {"table row"} */}
+        <CardHeader
+        onHover={<div> Show this on hover </div>}
+        avatar={
+          <Avatar
+            aria-label="recipe"
+            
             className={classes.avatar}
             src={props.post.userPhoto}
           />
@@ -54,6 +85,8 @@ export default function RecipeReviewCard(props) {
         title={props.post.userName}
         subheader={props.post.createAt}
       />
+      </TableRow>
+      </Table>
       <CardActionArea onClick = {()=> props.handleClick()}>
         <CardMedia
           style = {{width:"100%"}}

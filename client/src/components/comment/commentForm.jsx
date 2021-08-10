@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import axios from "axios";
 import CommentIcon from '@material-ui/icons/Comment';
 import AllComments from "./comments";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 class CommentForm extends React.Component {
     constructor(props) {
@@ -67,6 +68,7 @@ class CommentForm extends React.Component {
             >
                 Send
             </Button>
+            <AnchorLink href='#ads' style = {{marginLeft: 900}}>back to the top</AnchorLink>
             <AllComments postId = {this.props.postId} commentsPassed = {allComments}></AllComments>
         </form>
       );

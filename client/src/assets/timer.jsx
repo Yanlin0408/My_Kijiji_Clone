@@ -29,7 +29,7 @@ class Timer extends React.Component {
     render() {
       
       return (
-        <div>
+        <div id = "ads">
             {this.state.counter === 0?
             <div>
                 <img src={this.state.adsCollection[2][0]} border="0" width="740" height="90" alt="" class="img_ad" style={{ marginLeft: 30 }}></img>
