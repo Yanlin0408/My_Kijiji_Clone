@@ -12,26 +12,37 @@ class CommentForm extends React.Component {
         commentContent:"",
         rating:0,
         allComments:"",
+        counter:0,
         };
     }
 
     componentDidMount = async() => {
       const doc = await axios.get("/api/comment/get/"+this.props.postId);
       const comments = doc.data;
-      // console.log(comments);
       this.setState({allComments: comments});
-  };
+    };
   
     handleSendComment = async() => {
         const {commentContent,rating} = this.state;
         const doc = await axios.post("/api/comment/create",{commentContent,rating,postId:this.props.postId});
     }
 
-    handleKeyPress = async(event) => {
+    handleKeyPressFirst = async(event) => {
       if(event.key === 'Enter'){
         const {commentContent,rating} = this.state;
         const bb = await axios.post("/api/comment/create",{commentContent,rating,postId:this.props.postId});
       }
+    }
+
+    handleKeyPressSec = async() => {
+      const doc = await axios.get("/api/comment/get/"+this.props.postId);
+      const comments = doc.data;
+      this.setState({allComments: comments});
+    };
+
+    handleKeyPress = async(event) => {
+      this.handleKeyPressFirst(event);
+      this.handleKeyPressSec();
     }
 
     render() {

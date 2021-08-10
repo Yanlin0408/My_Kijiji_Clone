@@ -13,7 +13,6 @@ class AllComments extends React.Component {
     }
 
     UNSAFE_componentWillReceiveProps = async(props) => {
-      console.log(props);
       const doc = await axios.get("/api/comment/get/"+props.postId);
       const comments = doc.data;
       this.setState({allComments: comments});
@@ -48,7 +47,7 @@ class AllComments extends React.Component {
                     ?
                     <div>
                       <div className="row">
-                        <Typography variant="h6" style={{ marginLeft: 20 }}>no comment made yet</Typography>
+                        <Typography variant="h6" style={{ marginTop: 10, marginLeft: 20 }}>no comment made yet</Typography>
                       </div>
                     </div>
                     :

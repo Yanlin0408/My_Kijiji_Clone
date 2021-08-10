@@ -72,7 +72,7 @@ class MainPage extends React.Component {
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("price Low To High")}}>By Price low to high</a>
                   <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("price High To Low")}}>By Price high to low</a>
-                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("Latest First")}}>Newest</a>
+                  <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("Latest First")}}>Latest</a>
                   <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("Oldest First")}}>Oldest</a>
                   <a class="dropdown-item" onClick = {() => {this.sortByDiffMethods("Popularity")}}>By popularity</a>
                 </div>
