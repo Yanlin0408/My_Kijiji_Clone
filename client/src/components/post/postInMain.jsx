@@ -20,16 +20,10 @@ class AllPosts extends React.Component {
     }
 
     componentDidMount = async() => {
-      console.log("--componentdidmount");
         var userHash = {};
         this.sortByDiffMethods(this.state.sortingMethod);
-        const doc = await axios.get("/api/allUserGoogleId");
-        const googleIdTable = doc.data;
-        for(let i of googleIdTable){
-            const bitch = await axios.get("/api/totalLikesReceivedByUser/" + i);
-            let singleTotalLike = bitch.data.countTotalLike;
-            userHash[i] = singleTotalLike;
-        };
+        const doc = await axios.get("/api/getHashTable");
+        userHash = doc.data;
         this.setState({theTable: userHash});
     };
 
@@ -60,12 +54,6 @@ class AllPosts extends React.Component {
             posts = doc.data;
             this.setState({ posts:posts, sortingMethod:"Oldest First"});
         }
-    }
-
-    getTotalLikeUserReceived = async (userGoogleId) => {
-        console.log("--in func--",userGoogleId);
-        const doc = await axios.get("/api/totalLikesReceivedByUser/" + userGoogleId);
-        return doc.data.countTotalLike;
     }
 
     render() {
@@ -103,25 +91,10 @@ class AllPosts extends React.Component {
                     ))
                   ) : (
                     <div className="row">
-                        <Typography variant="h3" style={{ marginLeft: 20 }}>processing ...</Typography>
+                        <Typography variant="h3" style={{ marginLeft: 60 }}>processing ...</Typography>
                     </div>
                   )}
                 </div>
-                {/* <div className="row">
-                {posts.length !== 0 ? (
-                    this.renderPost()
-                    // posts.map((post) => (
-                    // <CardContent>
-                    // <Card 
-                    // post = {post} 
-                    // handleClick = {() => window.location="/post/"+post._id}/>
-                    // </CardContent>
-                    // ))
-                ) : (
-                    <Typography variant="h3" style={{ marginLeft: 20 }}>processing ...</Typography>
-                )}
-
-            </div> */}
         </div>
       );
     }

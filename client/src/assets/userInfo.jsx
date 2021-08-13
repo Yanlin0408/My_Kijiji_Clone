@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from "@material-ui/core/Avatar";
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
@@ -25,9 +26,17 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 export default function SimpleCard(props) {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+
+  const handleCheckEachOther = async() => {
+    console.log("doing shit");
+    const doc = await axios.get("/api/getUserIdFromGoogleId/" + props.postId);
+    console.log("---",doc.data);
+    window.location = "/checkUser/"+doc.data;
+  }
 
   return (
     <Card className={classes.root}>
@@ -47,15 +56,14 @@ export default function SimpleCard(props) {
         /{props.totalLikeNum} likes in total
         </Typography>
         </div>
-        <Typography variant="body2" component="p">
+        <Typography style = {{marginTop:-10, marginLeft:3}} variant="body2" component="p">
           {props.userEmail}
         </Typography>
         </div>
         </div>
-
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button onClick = {() => {handleCheckEachOther()}} size="small">Learn More About Him</Button>
       </CardActions>
     </Card>
   );

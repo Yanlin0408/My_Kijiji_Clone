@@ -44,8 +44,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-var likeNumber = 0;
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
   const theId = props.post.userId;
@@ -64,6 +62,7 @@ export default function RecipeReviewCard(props) {
         userPhoto = {props.post.userPhoto} 
         userName = {props.post.userName}
         userEmail = {props.post.userEmail}
+        postId = {props.post.userId}
         postLikeNum = {props.post.likes.length}
         totalLikeNum = {theTB[theId]}
         ></UserInfo>

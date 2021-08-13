@@ -36,7 +36,12 @@ export default function ControlledTooltips(props) {
     onClose={handleClose} 
     onOpen={handleOpen} 
     title={`click to check ${props.userName}'s page`}>
-      <Button variant="contained" color="primary" style = {{marginLeft:8}} onClick = {props.checkEachOther}>{props.userName}</Button>
+      <Button variant="contained" color="primary" 
+      style = {{marginLeft:8}} 
+      onClick = {props.checkEachOther}
+      >
+        {props.userName}'s page
+      </Button>
     </BootstrapTooltip>
   );
 }

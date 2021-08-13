@@ -39,13 +39,11 @@ class PostPage extends React.Component {
   handleBuy = async () => {
     this.setState({trigger:true});
     const doc = await axios.post("/api/buy/" + this.props.match.params.id);
-    this.setState({balance:doc.data.buyerBalance})
-    // console.log(doc.data.buyerBalance);
+    this.setState({balance:doc.data.buyerBalance});
   }
 
   handleCheckEachOther = async() => {
     const doc = await axios.get("/api/getUserIdBasedOnPost/" + this.props.match.params.id);
-    console.log(doc);
     window.location = "/checkUser/"+doc.data;
   }
 
@@ -104,9 +102,16 @@ class PostPage extends React.Component {
                     <Paper elevation={1} style={{ backgroundColor:"#E9ECEF", padding:10 }}>
                       <div style={{ marginLeft: 10, marginTop: 15 }}>
                         <h4 class="text-center">Owner Info <PeopleAltIcon fontSize="medium" /></h4>
-                        <div className="row" style={{ marginTop: 10, marginLeft: 10 }}><Avatar src={post.userPhoto} /><Tooltip checkEachOther={this.handleCheckEachOther} userName = {this.state.post.userName}></Tooltip> </div> 
-                        <div className="row" style={{ marginTop: 15, marginLeft: 10 }}><EmailIcon fontSize="large" /> <div style={{ marginLeft: 10 }}>{post.userEmail}</div></div>
-                        <div className="row" style={{ marginTop: 15, marginLeft: 10 }}><EventIcon fontSize="large" /> <div style={{ marginLeft: 10 }}>{post.createAt}</div></div>
+                        <div className="row" style={{ marginTop: 10, marginLeft: 10 }}><Avatar src={post.userPhoto} />
+                          <Tooltip checkEachOther={this.handleCheckEachOther} userName = {this.state.post.userName}></Tooltip> 
+                        </div> 
+                        <div className="row" style={{ marginTop: 15, marginLeft: 10 }}>
+                          <EmailIcon fontSize="large" /> 
+                          <div style={{ marginLeft: 10 }}>{post.userEmail}</div>
+                        </div>
+                        <div className="row" style={{ marginTop: 15, marginLeft: 10 }}>
+                          <EventIcon fontSize="large" /> <div style={{ marginLeft: 10 }}>{post.createAt}</div>
+                        </div>
                       </div>
                     </Paper>
                   </Paper>

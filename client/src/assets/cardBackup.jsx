@@ -47,7 +47,6 @@ export default function RecipeReviewCard(props) {
   return (
     <Card className={classes.root}>
         <CardHeader
-        onHover={<div> Show this on hover </div>}
         avatar={
           <Avatar
             aria-label="recipe"

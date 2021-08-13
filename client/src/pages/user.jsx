@@ -5,11 +5,16 @@ import { connect } from "react-redux";
 import { CardContent } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 class UserPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [], user:null};
+    this.state = { 
+      posts: [], 
+      user:null, 
+      theTable:{},
+    };
   }
 
   componentDidMount = async () => {
@@ -18,14 +23,32 @@ class UserPage extends React.Component {
     const posts = doc.data;
     const user = theUser.data.displayName;
     this.setState({ posts,user });
+
+    var userHash = {};
+    const docc = await axios.get("/api/getHashTable");
+    userHash = docc.data;
+    this.setState({theTable: userHash});
   };
 
   render() {
-    const { posts, user } = this.state;
+    const { posts, user, theTable } = this.state;
+    const { currentUser } = this.props;
     return (
       <div>
         <div class="jumbotron" style = {{marginTop:50}}>
         <Typography variant="h3">{user}'s page</Typography>
+        <div>
+            {currentUser ? (
+              <p style = {{marginLeft:10}} className="lead text-monospace">
+              {theTable[currentUser.googleId]} likes <FavoriteIcon color = "secondary" size = "large"/> received in total
+              </p>
+            ):(
+            <Typography variant="h3" style={{ marginLeft: 20 }}>processing ...</Typography>
+            )
+        }
+        </div>
+        
+        {/* <Typography variant="h3">{theTable[currentUser.googleId]}</Typography> */}
         </div>
         <div className="row">
           {posts.length !== 0 ? (

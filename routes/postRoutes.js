@@ -83,28 +83,27 @@ module.exports = (app) => {
         res.send(postsWeWant);
     });
 
-    app.get("/api/totalLikesReceivedByUser/:userGoogleId", async(req, res) => {
-        var countTotalLike = 0;
-        const allUsers = await User.find();
-        const theTargerUser = allUsers.filter((oneUser) => oneUser.googleId === req.params.userGoogleId);
-        const user = await User.findById(theTargerUser[0]._id);
-        const posts = await Post.find();
-        const postsWeWant = posts.filter((post) => post.userId === user.googleId);
-        postsWeWant.forEach(eachPost => {
-            countTotalLike = countTotalLike + eachPost.likes.length;
-        });
-        console.log(countTotalLike);
-        res.send({countTotalLike});
-    });
-
-    app.get("/api/allUserGoogleId", async(req, res) => {
+    // find all userId and the total # of likes they received
+    // and combine them in an Object with googleId:like.length pairs
+    app.get("/api/getHashTable", async(req, res) => {
         var allUserGoogleId = new Array();
+        var likesHashTable = {};
         const users = await User.find();
         users.forEach(eachUser => {
             allUserGoogleId.push(eachUser.googleId);
         });
-        res.send(allUserGoogleId);
-    });
+        for (let i of allUserGoogleId){
+            var countTotalLike = 0;
+            const user = await User.findOne({googleId: i});
+            const posts = await Post.find();
+            const postsWeWant = posts.filter((post) => post.userId === user.googleId);
+            postsWeWant.forEach(eachPost => {
+            countTotalLike = countTotalLike + eachPost.likes.length;
+        });
+            likesHashTable[i] = countTotalLike;
+        }
+        res.send(likesHashTable);
+    })
 
     //return all the posts we have in database
     app.get("/api/post/all/get", async(req, res) => {
@@ -185,6 +184,12 @@ module.exports = (app) => {
         res.send(sellerId);
     });
 
+    app.get("/api/getUserIdFromGoogleId/:userGoogleId", requireLogin, async(req, res) =>{
+        const allUsers = await User.find();
+        const theUser = allUsers.filter((singleUser) => {return singleUser.googleId === req.params.userGoogleId});
+        const theUserRealId = theUser[0]._id;
+        res.send(theUserRealId);
+    });
     
     //this API takes care of the inner changes in database 
     //no matter the user like or undo like for the post.
