@@ -12,20 +12,6 @@ const s3 = new AWS.S3({
     region: keys.Region,
 });
 
-// function requireLogin (req, res, next) {
-//     if (!req.user) {
-//         console.log(" ----- no user!!");
-//         // (res, req) => {
-//         //     res.redirect('/');
-//         // }
-//         // return res.status(401).send({ error: " ------ you must login!" });
-//         // res.redirect('/');
-//         res.send({redirectUrl:'/'});
-//     } else {
-//         next();
-//     }
-// };
-
 //it is exported to whoever "require" it
 module.exports = (app) => {
     //find the post user currently click on

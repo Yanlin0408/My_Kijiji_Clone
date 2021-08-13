@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 
 class Timer extends React.Component {
     constructor(props) {

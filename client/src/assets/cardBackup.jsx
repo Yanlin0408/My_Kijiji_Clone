@@ -10,8 +10,6 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { CardActionArea } from "@material-ui/core";
-import { TableRow } from '@material-ui/core';
-import { Table } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {

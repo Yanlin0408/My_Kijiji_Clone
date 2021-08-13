@@ -5,9 +5,7 @@ const passport = require("passport");
 module.exports = (app) => {
   // 这个app就是express的实例，从index.js里面传进来的
   app.get(
-    "/auth/google", // 创造 API URL
-    // 呼叫 Google oauth， 我们要选泽选取scope，就是选取我们要提取那些信息
-    // 然后弹出验证窗口，等待用户验证google账户
+    "/auth/google", 
     passport.authenticate("google", {
       scope: ["profile", "email"],
     })

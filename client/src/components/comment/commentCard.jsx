@@ -39,8 +39,6 @@ export default function SimpleCard(props) {
                   </div>
               <h6>{props.comment.commentContent}</h6>
               <div className = "row" style = {{display: 'flex', justifyContent: 'flex-end'}}>
-                  {/* <ThumbUpIcon style = {{marginLeft:15,marginTop:5}}></ThumbUpIcon>
-                  <ThumbDownIcon style = {{marginLeft:15,marginTop:6}}></ThumbDownIcon> */}
                     <Button
                     variant="contained"
                     color="primary"
