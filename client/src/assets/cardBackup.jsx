@@ -1,4 +1,4 @@
-import React, {globalThis} from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -10,10 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { CardActionArea } from "@material-ui/core";
-import Tooltip from '@material-ui/core/Tooltip';
-import UserInfo from './userInfo';
-
-
+import { TableRow } from '@material-ui/core';
+import { Table } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,35 +42,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-var likeNumber = 0;
 export default function RecipeReviewCard(props) {
   const classes = useStyles();
-  const theId = props.post.userId;
-  const theTB = props.theTB;
-  // const likeNum = props.userLikeNumber(props.post.userId);
-  // likeNum.then(value => {
-  //   console.log("---",value); // Success!
-  //   likeNumber = value;
-  //   console.log("-likenumber--",likeNumber);
-  // });
   return (
     <Card className={classes.root}>
-      <Tooltip title={
-      <React.Fragment>
-        <UserInfo 
-        userPhoto = {props.post.userPhoto} 
-        userName = {props.post.userName}
-        userEmail = {props.post.userEmail}
-        postLikeNum = {props.post.likes.length}
-        totalLikeNum = {theTB[theId]}
-        ></UserInfo>
-      </React.Fragment>
-    } interactive arrow placement = 'top'>
-      <CardHeader
+        <CardHeader
+        onHover={<div> Show this on hover </div>}
         avatar={
           <Avatar
             aria-label="recipe"
+            
             className={classes.avatar}
             src={props.post.userPhoto}
           />
@@ -82,12 +61,12 @@ export default function RecipeReviewCard(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        // title={props.post.userName}
-        subheader={props.post.createAt}/>
-    </Tooltip>
+        title={props.post.userName}
+        subheader={props.post.createAt}
+      />
       <CardActionArea onClick = {()=> props.handleClick()}>
         <CardMedia
-          style = {{width:"100%"}}
+          style = {{width:"100%"}}
           className={classes.media}
           image={"https://kijijiclones3.s3.ca-central-1.amazonaws.com/" + String(props.post.image)}
           // image={"https://yuzeproject.s3.ca-central-1.amazonaws.com/" + String(props.post.image)}
@@ -103,8 +82,6 @@ export default function RecipeReviewCard(props) {
         <Typography className = " text-info " variant="body2" color="textSecondary" component="h4">
           {"$ " + props.post.price}
         </Typography>
-
-
       </CardContent>
     </Card>
   );

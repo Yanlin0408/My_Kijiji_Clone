@@ -30,7 +30,12 @@ export default function ControlledTooltips(props) {
   }
 
   return (
-    <BootstrapTooltip arrow placement="top" open={open} onClose={handleClose} onOpen={handleOpen} title={`click to check ${props.userName}'s page`}>
+    <BootstrapTooltip 
+    arrow placement="top" 
+    open={open} 
+    onClose={handleClose} 
+    onOpen={handleOpen} 
+    title={`click to check ${props.userName}'s page`}>
       <Button variant="contained" color="primary" style = {{marginLeft:8}} onClick = {props.checkEachOther}>{props.userName}</Button>
     </BootstrapTooltip>
   );

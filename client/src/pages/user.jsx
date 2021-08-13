@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Card from "../assets/card";
+import Card from "../assets/cardBackup";
 import { connect } from "react-redux";
 import { CardContent } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";

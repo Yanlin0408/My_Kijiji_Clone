@@ -81,7 +81,30 @@ module.exports = (app) => {
         const posts = await Post.find();
         const postsWeWant = posts.filter((post) => post.userId === user.googleId);
         res.send(postsWeWant);
-    })
+    });
+
+    app.get("/api/totalLikesReceivedByUser/:userGoogleId", async(req, res) => {
+        var countTotalLike = 0;
+        const allUsers = await User.find();
+        const theTargerUser = allUsers.filter((oneUser) => oneUser.googleId === req.params.userGoogleId);
+        const user = await User.findById(theTargerUser[0]._id);
+        const posts = await Post.find();
+        const postsWeWant = posts.filter((post) => post.userId === user.googleId);
+        postsWeWant.forEach(eachPost => {
+            countTotalLike = countTotalLike + eachPost.likes.length;
+        });
+        console.log(countTotalLike);
+        res.send({countTotalLike});
+    });
+
+    app.get("/api/allUserGoogleId", async(req, res) => {
+        var allUserGoogleId = new Array();
+        const users = await User.find();
+        users.forEach(eachUser => {
+            allUserGoogleId.push(eachUser.googleId);
+        });
+        res.send(allUserGoogleId);
+    });
 
     //return all the posts we have in database
     app.get("/api/post/all/get", async(req, res) => {
@@ -93,7 +116,6 @@ module.exports = (app) => {
     app.get("/api/post/sort/byPrice", async(req, res) => {
         const posts = await Post.find();
         posts.sort((a, b) => a.price - b.price);
-        console.log(posts);
         res.send(posts);
     });
 
@@ -101,7 +123,6 @@ module.exports = (app) => {
     app.get("/api/post/sort/byPriceHighToLow", async(req, res) => {
         const posts = await Post.find();
         posts.sort((a, b) => b.price - a.price);
-        console.log(posts);
         res.send(posts);
     });
 
@@ -109,7 +130,6 @@ module.exports = (app) => {
     app.get("/api/post/sort/byDate", async(req, res) => {
         const posts = await Post.find();
         posts.sort((a, b) => b.createAt - a.createAt);
-        console.log(posts);
         res.send(posts);
     });
 
@@ -117,7 +137,6 @@ module.exports = (app) => {
     app.get("/api/post/sort/byPopularity", async(req, res) => {
         const posts = await Post.find();
         posts.sort((a, b) => b.likes.length - a.likes.length);
-        console.log(posts);
         res.send(posts);
     });
 
@@ -166,6 +185,7 @@ module.exports = (app) => {
         res.send(sellerId);
     });
 
+    
     //this API takes care of the inner changes in database 
     //no matter the user like or undo like for the post.
     app.post("/api/post/like/:postId", requireLogin, async(req, res) => {

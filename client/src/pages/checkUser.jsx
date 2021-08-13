@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Card from "../assets/card";
+import Card from "../assets/cardBackup";
 import { CardContent } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 
@@ -13,7 +13,6 @@ class CheckUserPage extends React.Component {
   componentDidMount = async () => {
     const user = await axios.get("/api/getAfterCheck/" + this.props.match.params.id);
     const posts = await axios.get("/api/getUser'sPosts/" + this.props.match.params.id);
-    console.log("-----posts",posts.data);
     this.setState({ posts:posts.data,user:user.data.displayName});
   };
 
